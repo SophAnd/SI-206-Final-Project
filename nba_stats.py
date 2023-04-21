@@ -1,34 +1,36 @@
 import unittest
-import sqlite3
 import requests
+from bs4 import BeautifulSoup
 import json
 
 def get_player_info(site):
-    response = requests.get(site)
-    data = response.text
-    in_dict = json.loads(data)
-    data = in_dict["data"]
-    id_list = []
+    r = requests.get(site)
+    soup = BeautifulSoup(r.content, 'html.parser')
+    body = soup.find_all('tbody')[0]
+    trs = body.find_all('tr')
     name_list = []
-    team_list = []
-    for person in data:
-        id = person["id"]
-        first_name = person["first_name"]
-        last_name = person["last_name"]
-        full_name = first_name + " " + last_name
-        team = person["team"]["full_name"]
-        id_list.append(id)
-        name_list.append(full_name)
-        team_list.append(team)
+    height_list = []
+    position_list = []
+    for tr in trs:
+        tds = tr.find_all('td')
+        name = tds[1].text
+        height = tds[4].text
+        position = tds[5].text
+        name_list.append(name)
+        height_list.append(height)
+        position_list.append(position)
+
     tuple_list = []
-    for i in range(len(id_list)):
-        tuple1 = (id_list[i], name_list[i], team_list[i])
+    for i in range(len(name_list)):
+        tuple1 = (name_list[i], height_list[i], position[i])
         tuple_list.append(tuple1)
     return tuple_list
 
+    
 def main():
-    name = 'https://www.balldontlie.io/api/v1/players'
-    print(get_player_info(name))
+    name = "https://www.ncaa.com/stats/basketball-men/d1/current/individual/136"
+    tuple_list = (get_player_info(name))
+    print(tuple_list)
 
 if __name__ == "__main__":
     main()
