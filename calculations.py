@@ -1,10 +1,6 @@
 import unittest
-import requests
-from bs4 import BeautifulSoup
-import json
 import os
 import sqlite3
-import random
 
 def open_database (db_name):
     path = os.path.dirname(os.path.abspath(__file__))
@@ -35,9 +31,9 @@ def calculate_avg_position_height(cur, conn):
     avg_f = round(total_f_height / total_f, 1)
     avg_c = round(total_c_height / total_c, 1)
     file1 = open("calc_output.txt", "w")
-    file1.writelines(f"The average height of an NBA Guard is {avg_g}. \n")
-    file1.writelines(f"The average height of an NBA Forward is {avg_f}. \n")
-    file1.writelines(f"The average height of an NBA Center is {avg_c}. \n")
+    file1.writelines(f"The average height of an NBA Guard is {avg_g} inches. \n")
+    file1.writelines(f"The average height of an NBA Forward is {avg_f} inches. \n")
+    file1.writelines(f"The average height of an NBA Center is {avg_c} inches. \n")
     file1.close()
     conn.commit()
 

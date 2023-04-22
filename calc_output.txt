@@ -1,3 +1,3 @@
-The average height of an NBA Guard is 73.9. 
-The average height of an NBA Forward is 81.4. 
-The average height of an NBA Center is 88.0. 
+The average height of an NBA Guard is 73.9 inches. 
+The average height of an NBA Forward is 81.4 inches. 
+The average height of an NBA Center is 88.0 inches. 

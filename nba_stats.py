@@ -1,10 +1,8 @@
 import unittest
 import requests
 from bs4 import BeautifulSoup
-import json
 import os
 import sqlite3
-import random
 
 def get_player_info(site):
     r = requests.get(site)
